@@ -126,7 +126,6 @@ class ShoppingCart {
             if(!is_array($val) OR !isset($val['price'], $val['qtty'])){ 
                 continue; 
             } 
-      
             $this->cart_items['cart_total'] += ($val['price'] * $val['qtty']); 
             $this->cart_items['total_items'] += $val['qtty']; 
             $this->cart_items[$key]['subtotal'] = ($this->cart_items[$key]['price'] * $this->cart_items[$key]['qtty']); 
