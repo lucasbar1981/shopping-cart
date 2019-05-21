@@ -86,7 +86,6 @@ class ShoppingCart {
      * @return bool 
      */ 
     public function insert_item($item = array()){ 
-
         if (!is_array($item) OR count($item) === 0){ 
             return FALSE; 
         }else{ 
@@ -132,15 +131,8 @@ class ShoppingCart {
             $this->cart_items['total_items'] += $val['qtty']; 
             $this->cart_items[$key]['subtotal'] = ($this->cart_items[$key]['price'] * $this->cart_items[$key]['qtty']); 
         } 
-         
-        // if cart is empty then delete it from the session 
-        if(count($this->cart_items) <= 2){ 
-            unset($_SESSION['cart_items']); 
-            return FALSE; 
-        }else{ 
-            $_SESSION['cart_items'] = $this->cart_items; 
-            return TRUE; 
-        } 
+        $_SESSION['cart_items'] = $this->cart_items; 
+        return TRUE;         
     } 
      
     /** 

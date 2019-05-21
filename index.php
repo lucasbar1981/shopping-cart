@@ -34,11 +34,11 @@ $cart = new ShoppingCart;
                                 <th>Action</th>
                             </tr>
                         </thead>
-                    <?php    
+                        <?php    
                         // Get availale products
                         $cartProducts = $cart->available_products(); 
                         foreach($cartProducts as $key => $product){ 
-                    ?>
+                        ?>
                         <tr>
                             <td><?=$product['name'];?></td>
                             <td>$<?=number_format($product['price'],2);?></td>
