@@ -1,38 +1,38 @@
 <?php 
-/* - Initialize shopping cart class - */
+// initialize shopping cart class 
 require_once 'ShoppingCart.class.php'; 
 $cart = new ShoppingCart; 
  
-/* - Default redirect location - */
+// default redirection
 $redirect_to = 'index.php'; 
  
-/* - Process the request based on the specified action - */
+// process the request based on the specified action 
 if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) { 
     if ($_REQUEST['action'] == 'addToCart' && is_numeric($_REQUEST['id'])) { 
         $prod_id = $_REQUEST['id']; 
-        // Get current products
-        $products = $cart->available_products();
+        // get current products
+        $products = $cart->getAvailableProducts();
         if ($products) {
-            // Set specific product details
+            // set specific product details
             $item_data = $products[$prod_id];
-            // Add the item identifier
+            // add the item identifier
             $item_data['id']  = $prod_id;   
-            // Insert item to cart 
-            $insert_item = $cart->insert_item($item_data); 
-            // Redirect to cart page 
+            // insert item to cart 
+            $insert_item = $cart->insertItem($item_data); 
+            // redirect to cart page 
             $redirect_to = $insert_item?'viewCart.php':'index.php'; 
         }
-    } elseif($_REQUEST['action']=='removeCartItem' && isset($_REQUEST['id'])) { 
-        // Remove item from cart 
-        $deleteItem = $cart->remove_item($_REQUEST['id']); 
-        // Redirect to cart page 
+    } elseif ($_REQUEST['action']=='removeCartItem' && isset($_REQUEST['id'])) { 
+        // remove item from cart 
+        $deleteItem = $cart->removeSingleItem($_REQUEST['id']); 
+        // redirect to cart page 
         $redirect_to = 'viewCart.php'; 
-    } elseif($_REQUEST['action']=='removeAllItems') {
-        // Destroy the session
-        $cart->destroy();
+    } elseif ($_REQUEST['action']=='removeAllItems') {
+        // remove all items from the session
+        $cart->removeAllItems();
     }
 } 
  
-// Redirect to the specific page 
+// redirect to the specific page 
 header("Location: $redirect_to"); 
 exit();

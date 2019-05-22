@@ -1,5 +1,5 @@
 <?php 
-/* - Initialize shopping cart class - */
+// initialize shopping cart class 
 include_once 'ShoppingCart.class.php'; 
 $cart = new ShoppingCart; 
 ?>
@@ -17,14 +17,14 @@ $cart = new ShoppingCart;
             
             <!-- Cart info -->
             <div class="row col-lg-6">
-                <a href="viewCart.php" class="btn btn-secondary btn-block <?php echo ($cart->total_items() == 0)?'disabled':''; ?>" title="View Cart"><?php echo ($cart->total_items() > 0)?'You have '.$cart->total_items().' items in your shopping cart (click to view)':'Your shopping cart is empty'; ?></a>
+                <a href="viewCart.php" class="btn btn-secondary btn-block <?php echo ($cart->getTotalItems() == 0)?'disabled':''; ?>" title="View Cart"><?php echo ($cart->getTotalItems() > 0)?'You have '.$cart->getTotalItems().' items in your shopping cart (click to view)':'Your shopping cart is empty'; ?></a>
             </div>
             <br />
-            <h2>Products</h2>
-
+            
             <!-- Product list -->
+            <h2>Products</h2>
             <div class="row col-lg-6">
-                <?php if ($cart->available_products()){ ?>
+                <?php if ($cart->getAvailableProducts()) { ?>
                 <div class="table-responsive">
                     <table class="table table-striped table-hover">
                         <thead>
@@ -36,8 +36,8 @@ $cart = new ShoppingCart;
                         </thead>
                         <?php    
                         // Get availale products
-                        $cartProducts = $cart->available_products(); 
-                        foreach($cartProducts as $key => $product){ 
+                        $cartProducts = $cart->getAvailableProducts(); 
+                        foreach($cartProducts as $key => $product) { 
                         ?>
                         <tr>
                             <td><?=$product['name'];?></td>

@@ -1,10 +1,10 @@
 <?php 
-/* - Initialize shopping cart class - */
+// initialize shopping cart class 
 include_once 'ShoppingCart.class.php'; 
 $cart = new ShoppingCart; 
 
-if ($cart->total_items() == 0) { 
-    // If cart is empty, redirect to home page
+if ($cart->getTotalItems() == 0) { 
+    // if cart is empty, redirect to home page
     header("Location: index.php"); 
 }
 ?>
@@ -42,9 +42,9 @@ if ($cart->total_items() == 0) {
                         </thead>
                         <tbody>
                             <?php 
-                            if($cart->total_items() > 0){ 
+                            if($cart->getTotalItems() > 0){ 
                                 // Get cart items from session and show them
-                                $cartItems = $cart->current_cart(); 
+                                $cartItems = $cart->getCurrentCart(); 
                                 foreach($cartItems as $item){ 
                             ?>
                             <tr>
@@ -55,12 +55,12 @@ if ($cart->total_items() == 0) {
                                 <td class="text-right"><button class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')?window.location.href='cartAction.php?action=removeCartItem&id=<?=$item['rowid'];?>':false;">Remove</button></td>
                             </tr>
                             <?php } } ?>
-                            <?php if($cart->total_items() > 0){ ?>
+                            <?php if($cart->getTotalItems() > 0){ ?>
                             <tr>
                                 <td></td>
                                 <td></td>
                                 <td><strong>Total</strong></td>
-                                <td class="text-right"><strong>$<?=number_format($cart->cart_total(),2);?></strong></td>
+                                <td class="text-right"><strong>$<?=number_format($cart->getCartTotal(),2);?></strong></td>
                                 <td></td>
                             </tr>
                             <?php } ?>
